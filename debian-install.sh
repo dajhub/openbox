@@ -52,7 +52,7 @@ sudo apt-get update
 
 
 
-# --- 4. Package Definitions ---
+# --- 5. Package Definitions ---
 PACKAGES_CORE=(xorg openbox dbus-x11)
 
 PACKAGES_UI=(tint2 lxappearance obconf pavucontrol dunst feh sxhkd lxpolkit picom gmrun)
@@ -66,7 +66,7 @@ PACKAGES_FONTS=(fonts-recommended fonts-font-awesome fonts-terminus fonts-noto f
 PACKAGES_BUILD=(cmake meson ninja-build pkg-config)
 PACKAGES_LOCK_DEPS=(autoconf gcc make libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev libgif-dev)
 
-# --- 5. Installation Logic ---
+# --- 6. Installation Logic ---
 if [ "$ONLY_CONFIG" = false ]; then
     section "INSTALLING ALL PACKAGES"
     
@@ -90,7 +90,7 @@ if [ "$ONLY_CONFIG" = false ]; then
 fi
 
 
-# --- 6. Configuration & Dotfiles ---
+# --- 7. Configuration & Dotfiles ---
 section "SETTING UP FOLDERS & DOTFILES"
 
 mkdir -p "$CONFIG_DIR"
@@ -108,7 +108,7 @@ else
     warn "Source directory $DOTFILES_SRC not found! Skipping dotfiles."
 fi
 
-# --- 7. LightDM Setup ---
+# --- 8. LightDM Setup ---
 section "INSTALLING LIGHTDM"
 sudo apt-get install -y lightdm lightdm-gtk-greeter
 
