@@ -1,55 +1,30 @@
-#echo "###############################################"
-#echo '# Install yay'
-#echo "###############################################"
-#
-#pacman -S --noconfirm --needed git base-devel
-#git clone https://aur.archlinux.org/yay.git
-#cd yay
-#makepkg -si
-#
-#pacman -S --noconfirm --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
-#
-#yay -Syu --noconfirm
-#
-## ---
-#
-#echo "###############################################"
-#echo '# yay installed'
-#echo "###############################################"
+#!/bin/bash
+set -e
 
-echo "###############################################"
-echo '# Install basic packages'
-echo "###############################################"
+# Colors
+MAGENTA="\033[35m"
+NC="\033[0m" # No Color
 
-pacman -Syy --noconfirm \
-            vlc \
-            zip \
-            unzip \
-            gmtp \
-            mtpfs \
-            evince \
-            wget \
-            xdg-utils \
-            xdg-user-dirs \
-            network-manager-applet \
-            tlp
+# Print section headers (POSIX compliant)
+section() {
+    printf "${MAGENTA}=========================================${NC}\n"
+    printf "${MAGENTA}>>>>> %s ${NC}\n" "$1"
+    printf "${MAGENTA}=========================================${NC}\n\n"
+    sleep 0.5
+}
 
-# Enable services
-systemctl enable --now cronie
-systemctl enable --now tlp
 
-echo "###############################################"
-echo '# Basic packages installed'
-echo "###############################################"
+## INSTALL YAY
+section "INSTALLING YAY"
+cd
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+cd
 
-#---
 
-echo "###############################################"
-echo '# Installing required packages for Openbox.'
-echo "###############################################"
 
-# Install Openbox and dependences
-pacman -Sy --noconfirm \
+# INSTALL OPENBOX & DEPENDENCIES
+section "INSTALL OPENBOX & DEPENDENCIES"
+yay -S --noconfirm \
             openbox \
             obconf \
             tint2 \
@@ -76,59 +51,28 @@ pacman -Sy --noconfirm \
             networkmanager \
             python-pyxdg
 
-systemctl mask NetworkManager-wait-online.service
+# INSTALL BASIC PACKAGES
+section "INSTALL BASIC PACKAGES"
+yay -S --noconfirm \
+            vlc \
+            zip \
+            unzip \
+            gmtp \
+            mtpfs \
+            evince \
+            wget \
+            xdg-utils \
+            xdg-user-dirs \
+            network-manager-applet \
+            tlp
 
-# COPY obamenu
-cp -v "$base_dir/obamenu" /usr/bin
-chmod +x /usr/bin/obamenu
+# Enable services
+systemctl enable --now tlp
 
-# Create config folder if no exists
-d="$d/.config/"
-[ ! -d "$d" ] && mkdir -v "$d" && chown -R $(stat "$d" -c %u:%g) "$d"
 
-echo "###############################################"
-echo '# Packages for Openbox installed.'
-echo "###############################################"
-
-#---
-
-echo "###############################################"
-echo '# Install thunar.'
-echo "###############################################"
-
-# Install thunar
-pacman -Sy --noconfirm thunar thunar-archive-plugin thunar-media-tags-plugin catfish gvfs gvfs-mtp gvfs-nfs gvfs-smb
-
-echo "###############################################"
-echo '# Installed thunar.'
-echo "###############################################"
-
-#---
-
-#echo "###############################################"
-#echo '# Install VSCodium.'
-#echo "###############################################"
-# 
-#(
-#    sudo -u nobody git clone https://aur.archlinux.org/vscodium-bin /tmp/vscodium-bin
-#    cd /tmp/vscodium-bin
-#    sudo -u nobody makepkg -sirc --noconfirm
-#)
-#
-## Cleanup
-#rm -rf /tmp/vscodium-bin
-
-#echo "###############################################"
-#echo '# VSCodium installed.'
-#echo "###############################################"
-
-#---
-
-echo "###############################################"
-echo '# Installing additional packages.'
-echo "###############################################"
-
-pacman -Sy --noconfirm \
+# INSTALL ADDITIONAL PACKAGES
+section "INSTALL ADDITIONAL PACKAGES"
+yay -S --noconfirm \
     xed \
     kitty \
     chromium \
@@ -145,22 +89,56 @@ pacman -Sy --noconfirm \
     gcolor2 
 
 
-#--- 
+# INSTALL THUNAR
+section "INSTALL THUNAR"
+yay -S --noconfirm \
+            thunar \
+            thunar-archive-plugin \
+            thunar-media-tags-plugin \
+            catfish \
+            gvfs \
+            gvfs-mtp \
+            gvfs-nfs \
+            gvfs-smb
 
-echo "###############################################"
-echo '# Install and enable lightdm display manager.'
-echo "###############################################"
 
-pacman -S --noconfirm lightdm lightdm-gtk-greeter
+### TERMINAL & EDITOR
+section "TERMINAL & EDITOR"
+yay -S --noconfirm kitty micro helix
+
+### YAZI (TERMINAL FILE MANAGER)
+section "INSTALL YAZI"
+yay -S --noconfirm yazi
+# Additional dependencies to extend yazi
+yay -S --noconfirm ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick
+
+### Zsh shell & Zinit
+section "ZSH & Zinit INSTALL"
+yay -S --noconfirm zsh
+bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+# Set zsh as default shell
+chsh -s /usr/bin/zsh
+
+
+
+# COPY obamenu
+section "COPY OBAMENU"
+sudo cp -v "$base_dir/obamenu" /usr/bin
+sudo chmod +x /usr/bin/obamenu
+
+# COPYING FILES & FOLDERS
+section "COPYING FILES & FOLDERS"
+mkdir -p ~/.config
+cd
+cd ~/openbox
+./folders.sh
+
+
+### DISPLAY MANAGER (LIGHTDM)
+section "INSTALL DISPLAY MANAGER (LIGHTDM)"
+
+yay -S --noconfirm lightdm lightdm-gtk-greeter
 
 systemctl start lightdm.service && systemctl enable lightdm.service
 
-echo "###############################################"
-echo '# Lightdm display manager installed.'
-echo "###############################################"
-
-#---
-
-echo "###############################################"
-echo '# FINISHED.'
-echo "###############################################"
+printf "${MAGENTA}Done! ${NC}\n"
