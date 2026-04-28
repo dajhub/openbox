@@ -1,81 +1,46 @@
-#!/bin/bash
+#!/bin/sh
+
+#!/bin/sh
 set -e
 
-echo "Creating folders for later use"
+REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-[ -d $HOME"/Documents" ] || mkdir -p $HOME"/Documents"
-[ -d $HOME"/Pictures" ] || mkdir -p $HOME"/Pictures"
-[ -d $HOME"/Downloads" ] || mkdir -p $HOME"/Downloads"
+echo "Installing dotfiles from $REPO_DIR"
 
-[ -d $HOME"/.icons" ] || mkdir -p $HOME"/.icons"
-[ -d $HOME"/.themes" ] || mkdir -p $HOME"/.themes"
-[ -d $HOME"/.fonts" ] || mkdir -p $HOME"/.fonts"
+sync_dir() {
+    src="$REPO_DIR/$1"
+    dest="$HOME/$2"
+    echo "Syncing directory $src → $dest"
+    rsync -a --delete "$src/" "$dest/"
+}
 
-[ -d $HOME"/.config/geany" ] || mkdir -p $HOME"/.config/geany"
-[ -d $HOME"/.config/kitty" ] || mkdir -p $HOME"/.config/kitty"
-[ -d $HOME"/.config/openbox" ] || mkdir -p $HOME"/.config/openbox"
-[ -d $HOME"/.config/rofi" ] || mkdir -p $HOME"/.config/rofi"
-[ -d $HOME"/.config/sxhkd" ] || mkdir -p $HOME"/.config/sxhkd"
-[ -d $HOME"/.config/tint2" ] || mkdir -p $HOME"/.config/tint2"
+sync_file() {
+    src="$REPO_DIR/$1"
+    dest="$HOME/$2"
+    echo "Copying file $src → $dest"
+    rsync -a "$src" "$dest"
+}
 
-[ -d $HOME"/.local/bin" ] || mkdir -p $HOME"/.local/bin"
-[ -d $HOME"/.local/share/xfce4/terminal/colorschemes" ] || mkdir -p $HOME"/.local/share/xfce4/terminal/colorschemes"
-[ -d $HOME"/.config/gtk-3.0" ] || mkdir -p $HOME"/.config/gtk-3.0"
-
-
-echo "###############################################"
-echo "### Personal folders created or existed already"
-echo "###############################################"
-
-
-echo "Copy fonts to .fonts"
-
-cp -R ~/openbox/.fonts/* ~/.fonts/
-
-echo "Building new fonts into the cache files";
-echo "Depending on the number of fonts, this may take a while..."
-fc-cache -fv ~/.fonts
+# Directories
+sync_dir ".config/helix" ".config/helix"
+sync_dir ".config/kitty" ".config/kitty"
+sync_dir ".config/obmenu-generator" ".config/obmenu-generator"
+sync_dir ".config/openbox" ".config/openbox"
+sync_dir ".config/sxhkd" ".config/sxhkd"
+sync_dir ".config/tint2" ".config/tint2"
+sync_dir ".config/yazi" ".config/yazi"
 
 
-echo "############################################"
-echo "#   Fonts have been copied and loaded       "
-echo "############################################"
-
-echo "Copy fonts to .icons"
-
-cp -R ~/openbox/.icons/* ~/.icons/
-
-echo "############################################"
-echo "#   Icons have been copied across           "
-echo "############################################"
-
-echo "Copy themes to .themes"
-
-cp -R ~/openbox/.themes/* ~/.themes/
-
-echo "############################################"
-echo "#   Themes have been copied across          "
-echo "############################################"
-
-echo "Copy .local/bin to .local/bin"
-
-cp -R ~/openbox/.local/bin* ~/.local/
-
-echo "############################################"
-echo "#   Bin has been copied across              "
-echo "############################################"
+sync_dir ".fonts" ".fonts"
+sync_dir ".themes" ".themes"
+sync_dir ".icons" ".icons"
 
 
-echo "Copy .config folders and files across to .config"
+# Files
+sync_file ".zshrc" ".zshrc"
 
-cp -R ~/openbox/.config/geany* ~/.config/
-cp -R ~/openbox/.config/kitty* ~/.config/
-cp -R ~/openbox/.config/openbox* ~/.config/
-cp -R ~/openbox/.config/rofi* ~/.config/
-cp -R ~/openbox/.config/sxhkd* ~/.config/
-cp -R ~/openbox/.config/tint2* ~/.config/
+sync_file ".config/obmenu" ".config/obmenu"
+sync_file ".config/picom.conf" ".config/picom.conf"
 
+echo "Done."
 
-echo "############################################"
-echo "#   .config folders and files have been copied across  "
-echo "############################################"

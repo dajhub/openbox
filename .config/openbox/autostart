@@ -5,8 +5,8 @@
 /usr/bin/lxpolkit &
 
 # panel
-#tint2 &
-$HOME/.config/openbox/polybar/scripts/launch.sh &
+tint2 &
+#$HOME/.config/openbox/polybar/scripts/launch.sh &
 
 # compositor
 picom &
@@ -15,7 +15,7 @@ picom &
 dunst &
 
 # wallpaper
-nitrogen --restore &
+feh --bg-fill $HOME/openbox/debianCatppuccin.png &
 
 # network  manager
 #nm-applet &
