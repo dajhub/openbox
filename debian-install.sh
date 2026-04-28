@@ -37,6 +37,20 @@ sudo -v
 # Update the sudo timestamp every 60 seconds so it never times out
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+# --- 4. Repositories ---
+section "INITIALIZING SYSTEM & REPOS"
+sudo apt-get update
+sudo apt-get install -y curl gpg lsb-release wget git rsync
+
+curl -sS https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc \
+    | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/debian.griffo.io.gpg >/dev/null
+
+echo "deb https://debian.griffo.io/apt $(lsb_release -sc) main" \
+    | sudo tee /etc/apt/sources.list.d/debian.griffo.io.list
+
+sudo apt-get update
+
+
 
 # --- 4. Package Definitions ---
 PACKAGES_CORE=(xorg openbox dbus-x11)
@@ -70,7 +84,6 @@ if [ "$ONLY_CONFIG" = false ]; then
     ./install-i3lock-color.sh || die "Failed to build i3lock-color"
 
     section "CONFIGURING SHELL"
-    # Added -y here so it doesn't prompt for Y/n
     sudo apt-get install -y lua5.4
     bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
     sudo chsh -s /usr/bin/zsh "$USER"
