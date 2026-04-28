@@ -30,7 +30,7 @@ echo "###############################################"
 
 echo "Copy fonts to .fonts"
 
-cp -R ~/dotfiles-openbox/.fonts/* ~/.fonts/
+cp -R ~/openbox/.fonts/* ~/.fonts/
 
 echo "Building new fonts into the cache files";
 echo "Depending on the number of fonts, this may take a while..."
@@ -43,7 +43,7 @@ echo "############################################"
 
 echo "Copy fonts to .icons"
 
-cp -R ~/dotfiles-openbox/.icons/* ~/.icons/
+cp -R ~/openbox/.icons/* ~/.icons/
 
 echo "############################################"
 echo "#   Icons have been copied across           "
@@ -51,7 +51,7 @@ echo "############################################"
 
 echo "Copy themes to .themes"
 
-cp -R ~/dotfiles-openbox/.themes/* ~/.themes/
+cp -R ~/openbox/.themes/* ~/.themes/
 
 echo "############################################"
 echo "#   Themes have been copied across          "
@@ -59,7 +59,7 @@ echo "############################################"
 
 echo "Copy .local/bin to .local/bin"
 
-cp -R ~/dotfiles-openbox/.local/bin* ~/.local/
+cp -R ~/openbox/.local/bin* ~/.local/
 
 echo "############################################"
 echo "#   Bin has been copied across              "
@@ -68,12 +68,12 @@ echo "############################################"
 
 echo "Copy .config folders and files across to .config"
 
-cp -R ~/dotfiles-openbox/.config/geany* ~/.config/
-cp -R ~/dotfiles-openbox/.config/kitty* ~/.config/
-cp -R ~/dotfiles-openbox/.config/openbox* ~/.config/
-cp -R ~/dotfiles-openbox/.config/rofi* ~/.config/
-cp -R ~/dotfiles-openbox/.config/sxhkd* ~/.config/
-cp -R ~/dotfiles-openbox/.config/tint2* ~/.config/
+cp -R ~/openbox/.config/geany* ~/.config/
+cp -R ~/openbox/.config/kitty* ~/.config/
+cp -R ~/openbox/.config/openbox* ~/.config/
+cp -R ~/openbox/.config/rofi* ~/.config/
+cp -R ~/openbox/.config/sxhkd* ~/.config/
+cp -R ~/openbox/.config/tint2* ~/.config/
 
 
 echo "############################################"

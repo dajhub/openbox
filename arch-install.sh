@@ -122,9 +122,9 @@ chsh -s /usr/bin/zsh
 
 
 # COPY obamenu
-section "COPY OBAMENU"
-sudo cp -v "$base_dir/obamenu" /usr/bin
-sudo chmod +x /usr/bin/obamenu
+#section "COPY OBAMENU"
+#sudo cp -v "$base_dir/obamenu" /usr/bin
+#sudo chmod +x /usr/bin/obamenu
 
 # COPYING FILES & FOLDERS
 section "COPYING FILES & FOLDERS"
