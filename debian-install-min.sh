@@ -78,4 +78,4 @@ else
     warn "Source directory $DOTFILES_SRC not found! Skipping dotfiles."
 fi
 
-section "Installation complete. Reboot to see the login screen."
+section "Installation complete. Reboot for login screen."
