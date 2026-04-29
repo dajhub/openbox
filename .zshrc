@@ -66,7 +66,7 @@ bindkey '^[[1;5D' backward-word
 # ====================================================================
 # 5. ALIASES & SHELL OPTIONS
 # ====================================================================
-alias hx="helix"
+alias helix="hx"
 alias ..="cd .."
 alias ga="git add ."
 alias gc="git commit -m"

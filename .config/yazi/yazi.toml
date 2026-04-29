@@ -1,4 +1,4 @@
 [opener]
 edit = [
-    { run = '/usr/sbin/helix "$@"', block = true }
+    { run = '/usr/bin/hx "$@"', block = true }
 ]
