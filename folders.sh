@@ -1,6 +1,4 @@
 #!/bin/sh
-
-#!/bin/sh
 set -e
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -18,7 +16,11 @@ sync_file() {
     src="$REPO_DIR/$1"
     dest="$HOME/$2"
     echo "Copying file $src → $dest"
-    rsync -a "$src" "$dest"
+    if [ -f "$src" ]; then
+        rsync -a "$src" "$dest"
+    else
+        echo "Warning: file not found: $src"
+    fi
 }
 
 # Directories
@@ -39,7 +41,7 @@ sync_dir ".icons" ".icons"
 # Files
 sync_file ".zshrc" ".zshrc"
 
-sync_file ".config/obmenu" ".config/obmenu"
+sync_file ".config/obamenu" ".config/obamenu"
 sync_file ".config/picom.conf" ".config/picom.conf"
 
 echo "Done."
