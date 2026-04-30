@@ -9,7 +9,7 @@ sync_dir() {
     src="$REPO_DIR/$1"
     dest="$HOME/$2"
     echo "Syncing directory $src → $dest"
-    rsync -a --delete "$src/" "$dest/"
+    rsync -av "$src/" "$dest/"
 }
 
 sync_file() {
