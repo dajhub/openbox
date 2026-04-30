@@ -24,13 +24,14 @@ sync_file() {
 }
 
 # Directories
-sync_dir ".config/obmenu-generator" ".config/obmenu-generator"
 sync_dir ".config/openbox" ".config/openbox"
 sync_dir ".config/tint2" ".config/tint2"
+sync_dir ".themes" ".themes"
+sync_dir ".icons" ".icons"
 
 
 # Files
-sync_file ".config/obamenu" ".config/obamenu"
+
 
 
 echo "Done."

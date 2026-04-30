@@ -55,9 +55,9 @@ sudo apt-get update
 # --- 5. Package Definitions ---
 PACKAGES_CORE=(xorg openbox dbus-x11)
 
-PACKAGES_UI=(tint2 lxappearance obconf pavucontrol dunst feh sxhkd lxpolkit picom gmrun)
+PACKAGES_UI=(tint2 lxappearance obconf pavucontrol dunst feh sxhkd lxpolkit picom jgmenu)
 
-PACKAGES_FILE_MANAGER=(yazi ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick)
+PACKAGES_FILE_MANAGER=(yazi ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unzip)
 PACKAGES_AUDIO=(pavucontrol pulsemixer pamixer pipewire-audio)
 PACKAGES_UTILITIES=(avahi-daemon acpi acpid xfce4-power-manager flameshot qimgv xdg-user-dirs-gtk rsync brightnessctl bc htop fastfetch redshift xss-lock firefox-esr)
 PACKAGES_TERMINAL=(alacritty kitty zsh)

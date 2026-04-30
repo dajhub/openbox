@@ -26,7 +26,6 @@ sync_file() {
 # Directories
 sync_dir ".config/helix" ".config/helix"
 sync_dir ".config/kitty" ".config/kitty"
-sync_dir ".config/obmenu-generator" ".config/obmenu-generator"
 sync_dir ".config/openbox" ".config/openbox"
 sync_dir ".config/sxhkd" ".config/sxhkd"
 sync_dir ".config/tint2" ".config/tint2"
@@ -40,8 +39,6 @@ sync_dir ".icons" ".icons"
 
 # Files
 sync_file ".zshrc" ".zshrc"
-
-sync_file ".config/obamenu" ".config/obamenu"
 sync_file ".config/picom.conf" ".config/picom.conf"
 
 echo "Done."

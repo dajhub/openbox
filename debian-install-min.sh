@@ -47,7 +47,7 @@ sudo apt-get update
 
 # --- 5. Package Definitions ---
 PACKAGES_CORE=(openbox dbus-x11)
-PACKAGES_UI=(tint2 obconf)
+PACKAGES_UI=(tint2 obconf jgmenu)
 
 
 # --- 6. Installation Logic ---
