@@ -227,33 +227,10 @@
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="W-F1">
-      <action name="GoToDesktop">
-        <to>1</to>
-      </action>
-    </keybind>
-    <keybind key="W-F2">
-      <action name="GoToDesktop">
-        <to>2</to>
-      </action>
-    </keybind>
-    <keybind key="W-F3">
-      <action name="GoToDesktop">
-        <to>3</to>
-      </action>
-    </keybind>
-    <keybind key="W-F4">
-      <action name="GoToDesktop">
-        <to>4</to>
-      </action>
-    </keybind>
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
     <!-- Keybindings for windows -->
-    <keybind key="A-F4">
-      <action name="Close"/>
-    </keybind>
     <keybind key="A-Escape">
       <action name="Lower"/>
       <action name="FocusToBottom"/>
@@ -323,15 +300,6 @@
 	</keybind>
     
     <!-- Keybindings for running applications -->
-    <keybind key="W-e">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Thunar</name>
-        </startupnotify>
-        <command>thunar</command>
-      </action>
-    </keybind>
     
      <keybind key="C-space">
       <action name="ShowMenu">
@@ -510,13 +478,8 @@
     </keybind>
     
     <!-- Keybinding to open applications -->
-    <keybind key="W-f">
-		<action name="Execute">
-			<execute>thunar</execute>
-		</action>
-	</keybind>
-    
-    <keybind key="W-g">
+   
+  <keybind key="W-g">
 		<action name="Execute">
 			<execute>geany</execute>
 		</action>
